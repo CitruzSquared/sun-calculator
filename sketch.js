@@ -509,6 +509,8 @@ function initialize() {
     timezone = Math.floor(document.getElementById("timezone_value").value);
     if (timezone > hours) {
         timezone -= hours;
+    } else if (timezone < -hours) {
+        timezone += hours;
     }
     if (document.getElementById("auto_timezone").checked) {
         timezone = Math.floor((local_longitude + PI / hours) / (TWOPI / hours));
