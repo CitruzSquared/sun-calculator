@@ -525,7 +525,7 @@ function initialize() {
 }
 
 function download() {
-    let string = `${local_latitude * 180 / PI}, ${local_longitude * 180 / PI}, ${set_date}dy.png`;
+    let string = `${(local_latitude * 180 / PI).toFixed(2)}N, ${(local_longitude * 180 / PI).toFixed(2)}E, ${Math.floor(set_date)}dy.png`;
     save(final_output, string);
 }
 
