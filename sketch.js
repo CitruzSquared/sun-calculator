@@ -390,8 +390,8 @@ function calculate_altitude(alt, sign) {
 
     for (let i = 0; i < 20; i++) {
         if (polar_radius != 0 && equatorial_radius != 0) {
-            let x = earth_radius * cosine * Math.cos(sidereal_time);
-            let y = earth_radius * cosine * Math.sin(sidereal_time);
+            let x = earth_radius * cosine * Math.cos(sidereal_time + local_longitude);
+            let y = earth_radius * cosine * Math.sin(sidereal_time + local_longitude);
             let z = earth_radius * sine;
             observer_equatorial_coordinates = [x, y, z];
         }
@@ -447,8 +447,8 @@ function calculate_meridian_pass(mode) {
 
     for (let i = 0; i < 20; i++) {
         if (polar_radius != 0 && equatorial_radius != 0) {
-            let x = earth_radius * cosine * Math.cos(sidereal_time);
-            let y = earth_radius * cosine * Math.sin(sidereal_time);
+            let x = earth_radius * cosine * Math.cos(sidereal_time + local_longitude);
+            let y = earth_radius * cosine * Math.sin(sidereal_time + local_longitude);
             let z = earth_radius * sine;
             observer_equatorial_coordinates = [x, y, z];
         }
