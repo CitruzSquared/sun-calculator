@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun Calculator</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 10px;
+        }
+
+        td.inputbox {
+            padding: 0;
+            margin: 0;
+        }
+
+        table,
+        th,
+        tr,
+        td {
+            text-align: center;
+            border: 1px solid white;
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        input[type="number"] {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: #ffffff;
+            width: 280px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        input[type="number"].nowidth {
+            width: 70px;
+        }
+
+        input:hover {
+            background-color: #353535;
+        }
+
+        input:focus {
+            background-color: #353535;
+        }
+    </style>
+</head>
+
+<body style="background-color:#282828;font-family:Arial;color:white;">
+    <div style="display:flex">
+
+        <div style="flex:1; padding: 10px;" id="maindiv">
+            <h1>
+                Sun Calculator
+            </h1>
+            <p> Visualize the Sun's path. Scroll to read information below. Click the "download" button to save. </p>
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan="4" style="font-size: 14pt; font-weight: bold;"> Astronomical Data </td>
+                    </tr>
+                </thead>
+                <tr>
+                    <th> Equatorial Radius </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="eq_radius_value" ,
+                            placeholder="Leave blank for no parallax" , value="6378.137">
+                    </td>
+                    <th> Polar Radius </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="polar_radius_value" ,
+                            placeholder="Leave blank for no parallax" , value="6356.752">
+                    </td>
+                </tr>
+                <tr>
+                    <th> Semi Major Axis </th>
+                    <td class="inputbox" colspan="3"> <input type="number" id="SMA_value" ,
+                            placeholder="In same units as radius" , value="149598023">
+                    </td>
+                </tr>
+                <tr>
+                    <th> Year Length </th>
+                    <td class="inputbox" colspan="3"> <input type="number" id="year_value" ,
+                            placeholder="In planet days" , value="365.256363">
+                    </td>
+                </tr>
+                <tr>
+                    <th> Eccentricity </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="eccentricity_value" ,
+                            placeholder="From 0 to 1" , value="0.0167"> </td>
+                    <th> Axial Tilt </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="tilt_value" ,
+                            placeholder="In degrees" , value="23.44">
+                    </td>
+                </tr>
+                <tr>
+                    <th> Arg. of Perigee </th>
+                    <td class="inputbox" colspan="3"> <input type="number" id="AOP_value" , placeholder="In degrees" ,
+                            value="282.94719">
+                    </td>
+                </tr>
+                <tr>
+                    <th> Perihelion Date </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="offset_value" ,
+                            placeholder="In planet days" , value="3"> </td>
+                    <th> Hours in Day </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="hours_value" ,
+                            placeholder="Integer value" , value="24"> </td>
+                </tr>
+                <tr>
+                    <th> Twilight Increment </th>
+                    <td class="inputbox" colspan="3"> <input type="number" id="twilight_value" ,
+                            placeholder="In degrees" , value="6">
+                    </td>
+                </tr>
+            </table>
+            </br>
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan="4" style="font-size: 14pt; font-weight: bold;"> Observing Site Data </td>
+                    </tr>
+                </thead>
+                <tr>
+                    <th> Latitude </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="lat_value" ,
+                            placeholder="In degrees">
+                    </td>
+                    <th> Longitude </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="long_value" ,
+                            placeholder="In degrees">
+                    </td>
+                </tr>
+                <tr>
+                    <th> Date </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="date_value" ,
+                            placeholder="In planet days">
+                    </td>
+                    <th> Timezone </th>
+                    <td class="inputbox"> <input class="nowidth" type="number" id="timezone_value" ,
+                            placeholder="In planet hours">
+                    </td>
+                </tr>
+                <tr>
+                    <th> Auto Timezone </th>
+                    <td> <input type="checkbox" id="auto_timezone" checked>
+                    </td>
+                    <th> No Timezones </th>
+                    <td> <input type="checkbox" id="local_time">
+                    </td>
+                </tr>
+            </table>
+
+
+            </br>
+            <button type="button" style="margin: 10px; padding: 10px" , onclick="initialize()">Generate</button>
+            <button type="button" style="margin: 10px; padding: 10px" , onclick="download()">Download</button>
+        </div>
+        <main style="flex:1">
+            <script src=" p5.js">
+            </script>
+            <!-- <script src="../addons/p5.sound.js"></script> -->
+            <script src="sketch.js"></script>
+        </main>
+    </div>
+    <h2> Information</h2>
+    <ul>
+        <li> <b>Equatorial Radius</b> - Equatorial radius of the planet. Leaving it as 0 will calculate no parallax.
+        </li>
+        <li> <b>Polar Radius</b> - Polar radius of the planet. Leaving it as 0 will calculate no parallax. </li>
+        <li> <b>Semi Major Axis</b> - Semi major axis of the planet's orbit. </li>
+        <li> <b>Year Length</b> - Orbital period of the planet, in planet days. </li>
+        <li> <b>Eccentricity</b> - Eccentricity of the planet's orbit. Must be between 0 (inclusive) and 1 (exclusive).
+        </li>
+        <li> <b>Axial Tilt</b> - Axial tilt of the planet, in degrees. </li>
+        <li> <b>Arg. of Perigee</b> - Longitude of the Sun when the planet is at perihelion, in degrees. This is equal
+            to the argument of perihelion + 180 degrees. </li>
+        <li> <b>Perihelion Date</b> - Date of the year when the planet is at perihelion, in planet days. </li>
+        <li> <b>Hours in Day</b> - Number of subdivisions within one planet day. Must be an integer. </li>
+        <li> <b>Twilight Increment</b> - Degrees of solar altitude in between each twilight. </li>
+    </ul>
+    <ul>
+        <li> <b>Latitude</b> - Latitude of the observing site, in degrees. </li>
+        <li> <b>Longitude</b> - Longitude of the observing site, in degrees. </li>
+        <li> <b>Date</b> - Date of observation, in planet days. </li>
+        <li> <b>Timezone</b> - Timezone of the observing site, in planet hours. </li>
+        <li> <b>Auto Timezone</b> - Automatically calculate the timezone of the observing site. Overrides "Timezone".
+        </li>
+        <li> <b>No Timezones</b> - No timezones are used. Uses pure and exact local time. Overrides "Timezone" and "Auto
+            Timezone". </li>
+    </ul>
+    <h2> Statistics (Ignores Refraction) </h2>
+    <div id="stats" style="display: flex;"></div>
+</body>
+
+</html>
