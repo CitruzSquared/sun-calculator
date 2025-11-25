@@ -530,7 +530,7 @@ function download() {
 }
 
 function make_stats() {
-    document.getElementById("stats").innerHTML = "";
+    document.getElementById("stats").innerHTML = "<ul> <li> <b> Solar Terms Table </b> - Dates of the 8 major solar terms. Dates are given in planet days (using the same date format as above). </li> <li> <b> Sunrise / Sunset table </b> - Hours are defined as above. 60 minutes in 1 hour, 60 seconds in 1 minute. </li> </ul>";
     for (let i = 0; i < solar_terms.length; i++) {
         if (solar_terms[i] < 0) {
             solar_terms += sidereal_year;
